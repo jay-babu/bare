@@ -43,6 +43,13 @@ to quickly create a Cobra application.`,
 		if err != nil {
 			panic(err)
 		}
+		local = exec.Command("git", "config", "remote.origin.fetch", "+refs/heads/*:refs/remotes/origin/*")
+		local.Stdout = os.Stdout
+		local.Stderr = os.Stderr
+		err = local.Run()
+		if err != nil {
+			log.Fatal(err)
+		}
 		local = exec.Command("git", "worktree", "add", "main")
 		local.Stdout = os.Stdout
 		local.Stderr = os.Stderr
